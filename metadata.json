@@ -1,0 +1,12 @@
+{
+    "name": "edda-puppet",
+    "version": "0.2.0",
+    "author": "Ivan Zenteno",
+    "license": "GPL",
+    "summary": "A module for EDDA ",
+    "source": "https://github.com/k001/puppet-edda",
+    "project_page": "https://github.com/k001/puppet-edda",
+    "issues_url": "https://github.com/k001/puppet-edda/issues",
+    "tags": ["edda", "netflix"],
+}
+
