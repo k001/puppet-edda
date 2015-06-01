@@ -1,12 +1,14 @@
 {
-    "name": "edda-puppet",
-    "version": "0.2.0",
-    "author": "Ivan Zenteno",
-    "license": "GPL",
-    "summary": "A module for EDDA ",
-    "source": "https://github.com/k001/puppet-edda",
-    "project_page": "https://github.com/k001/puppet-edda",
-    "issues_url": "https://github.com/k001/puppet-edda/issues",
-    "tags": ["edda", "netflix"],
+  "name": "izenteno-edda",
+  "version": "0.0.1",
+  "author": "izenteno",
+  "summary": "A module for EDDA Netflix",
+  "license": "Apache 2.0",
+  "source": "https://github.com/k001/puppet-edda.git",
+  "project_page": "https://github.com/k001/puppet-edda",
+  "issues_url": "https://github.com/k001/puppet-edda/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
 }
 
