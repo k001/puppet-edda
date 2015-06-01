@@ -3,3 +3,4 @@ class edda {
   include edda::config
   include edda::service
 }
+class {'edda':}
