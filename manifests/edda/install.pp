@@ -1,7 +1,7 @@
-# Class: profile::eadp::edda::install
-#
-#
-class profile::eadp::edda::install inherits profile::eadp::edda {
+class {'tomcat':}
+class {'java':}
+
+class profile::edda::install inherits profile::edda {
   exec { 'puppetlabs-java':
     path => '/bin:/usr/bin',
     command => '/usr/bin/puppet module install puppetlabs-java --force'
@@ -11,7 +11,7 @@ class profile::eadp::edda::install inherits profile::eadp::edda {
     command => '/usr/bin/puppet module install puppetlabs-tomcat --force'
   }
   package {
-    'java-1.6.0-openjdk':
+    'java-1.7.0-openjdk':
     ensure => 'present';
   }
 }

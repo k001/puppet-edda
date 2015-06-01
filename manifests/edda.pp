@@ -1,10 +1,9 @@
-# Class: profile::eadp::edda
-#
-#
-class profile::eadp::edda {
-  anchor {'profile::eadp::edda::begin':}  ->
-  class {'profile::eadp::edda::install':} ->
-  class {'profile::eadp::edda::config':}  ->
-  class {'profile::eadp::edda::service':} ->
-  anchor {'profile::eadp::edda::end':}
+import 'edda/*'
+
+class profile::edda {
+  anchor {'profile::edda::begin':}  ->
+  class {'profile::edda::install':} ->
+  class {'profile::edda::config':}  ->
+  class {'profile::edda::service':} ->
+  anchor {'profile::edda::end':}
 }

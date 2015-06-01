@@ -1,7 +1,7 @@
-# Class: profile::eadp::edda::service
-#
-#
-class profile::eadp::edda::service inherits profile::eadp::edda {
+class {'tomcat':}
+class {'java':}
+
+class profile::edda::service {
   tomcat::service { 'default':
     catalina_base => '/usr/local/tomcat',
   }
