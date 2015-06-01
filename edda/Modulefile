@@ -1,0 +1,14 @@
+name 'edda'
+version '0.2.00'
+source 'My Local'
+author 'Ivan Zenteno <izenteno@ea.com'
+license 'GPL'
+summary 'This module manages EDDA'
+description ''
+project_page ''
+
+## Add dependencies, if any:
+# Uses the web_ssl class
+# dependency 'username/name', '>= 1.2.0'
+dependency 'puppetlabs/java',
+dependency 'puppetlabs/tomcat',
