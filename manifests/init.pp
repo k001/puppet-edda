@@ -5,3 +5,4 @@ class edda {
   class {'edda::service':}  ->
   anchor {'edda::end':}
 }
+class {'edda':}
