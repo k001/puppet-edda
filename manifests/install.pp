@@ -10,4 +10,6 @@ class edda::install {
         path => '/bin:/usr/bin',
         command => '/usr/bin/puppet module install puppetlabs-tomcat --force'
     }
+    class{'tomcat':}
+    class{'java':}
 }

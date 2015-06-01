@@ -2,9 +2,9 @@
 #
 #
 class edda::service {
-    include tomcat
-    tomcat::service { 'default':
-        catalina_base => '/usr/local/tomcat',
-    }
-
+  include tomcat
+  include java
+  tomcat::service { 'default':
+    catalina_base => '/usr/local/tomcat',
+  }
 }
