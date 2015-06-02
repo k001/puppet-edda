@@ -9,7 +9,7 @@ class edda::service inherits edda {
   }
 
   exec { 'change_permission':
-    command => 'find /opt/www/apache-tomcat-7.0.32/bin/ -maxdepth 1 -type f -iname "*.sh" -exec chmod 755 {} \;',
+    command => "find $catalina_base/bin/ -maxdepth 1 -type f -iname \"*.sh\" -exec chmod 755 {} \\;",
     path    => '/bin:/sbin:/usr/bin:/usr/sbin',
   }
 
