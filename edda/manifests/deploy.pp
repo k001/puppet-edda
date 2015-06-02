@@ -7,4 +7,9 @@ class edda::deploy inherits edda {
     catalina_base => "$catalina_home",
     war_source    => $war_source,
   }
+
+  file{"$catalina_home":
+    ensure => "directory",
+    mode   => 750
+  }
 }
