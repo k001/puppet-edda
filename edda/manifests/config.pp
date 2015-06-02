@@ -7,6 +7,7 @@ class edda::config inherits edda {
   $start_command = $edda::params::start_command
   $stop_command  = $edda::params::stop_command
   $tomcat_source = $edda::params::tomcat_url_source
+  $hostname      = $::hostname
 
   file { "$catalina_home":
     ensure => "directory",
@@ -14,7 +15,7 @@ class edda::config inherits edda {
   }->
   file { 'setenv.sh':
     path    => "$catalina_home/bin/setenv.sh",
-    content => template('templates/setenv.erb'),
+    content => template('edda/templates/setenv.erb'),
     mode    => 0644,
     owner   => root,
     group   => root,
@@ -22,7 +23,7 @@ class edda::config inherits edda {
   }->
   file { 'logging.properties':
     path    => "$catalina_home/conf/logging.properties",
-    source  => template('templates/logging.properties.erb'),
+    source  => template('edda/templates/logging.properties.erb'),
     mode    => 0644,
     owner   => root,
     group   => root,
