@@ -8,6 +8,11 @@ class edda::config inherits edda {
   $stop_command  = $edda::params::stop_command
   $tomcat_source = $edda::params::tomcat_url_source
 
+  file{"$catalina_home":
+    ensure => "directory",
+    mode   => 750
+  }->
+
   tomcat::instance { $service_name:
     source_url          => $tomcat_url_source,
     catalina_home       => $catalina_home,
