@@ -4,10 +4,6 @@ class edda::service inherits edda {
   $start_command = $edda::params::start_command
   $stop_command  = $edda::params::stop_command
 
-  file { "/opt/www/apache-tomcat-7.0.32/bin":
-    mode => 0655,
-  }
-
   exec { 'change_permission':
     command => "find $catalina_home/bin/ -maxdepth 1 -type f -iname \"*.sh\" -exec chmod 755 {} \\;",
     path    => '/bin:/sbin:/usr/bin:/usr/sbin',
