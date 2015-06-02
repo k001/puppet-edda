@@ -8,16 +8,23 @@ class edda::config inherits edda {
   $stop_command  = $edda::params::stop_command
   $tomcat_source = $edda::params::tomcat_url_source
 
-  file{"$catalina_home":
+  file { "$catalina_home":
     ensure => "directory",
     mode   => 750
   }->
-  file {"setenv.sh":
-    path    => "$catalina_home/bin/",
+  file { "$catalina_home/setenv.sh":
     content => template('templates/setenv.erb'),
     mode    => 0644,
     owner   => root,
     group   => root,
+    replace => true,
+  }->
+  file { "$catalina_home/conf/logging.properties":
+    content => template('templates/logging.properties.erb'),
+    mode    => 0644,
+    owner   => root,
+    group   => root,
+    replace => true,
   }->
   tomcat::instance { $service_name:
     source_url          => $tomcat_url_source,
