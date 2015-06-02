@@ -45,6 +45,10 @@ class edda::deploy inherits edda {
 }
 
 class edda::install inherits edda {
+  package { 'java-1.7.0-openjdk':
+    ensure => installed,
+  }
+
   exec { 'puppetlabs-java':
     path    => '/bin:/usr/bin',
     command => '/usr/bin/puppet module install puppetlabs-java --force',
@@ -57,10 +61,4 @@ class edda::install inherits edda {
     path    => '/bin:/usr/bin',
     command => '/usr/bin/puppet module install stahnma-epel --force',
   }
-
-  package {
-    'java-1.7.0-openjdk':
-    ensure => 'present';
-  }
-
 }
