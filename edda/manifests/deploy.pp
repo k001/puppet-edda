@@ -1,10 +1,10 @@
 class edda::deploy inherits edda {
   $war_source    = $edda::params::war_source
-  $catalina_base = $edda::params::catalina_base
+  $catalina_home = $edda::params::catalina_home
   $war_name      = $edda::params::war_name
 
   tomcat::war { $war_name:
-    catalina_base => $catalina_base,
+    catalina_home => $catalina_home,
     war_source    => $war_source,
   }
 }

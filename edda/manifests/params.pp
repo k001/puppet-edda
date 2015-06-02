@@ -1,6 +1,6 @@
 class edda::params {
   $service_name      = 'tomcat8'
-  $catalina_base     = '/opt/www/tomcat8'
+  $catalina_home     = '/opt/www/tomcat8'
   $start_command     = "${catalina_base}/bin/startup.sh"
   $stop_command      = "${catalina_base}/bin/shutdown.sh"
   $war_source        = "http://s3.amazonaws.com/edda-bucket/dev/war/$war_name"
