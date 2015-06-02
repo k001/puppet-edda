@@ -1,7 +1,7 @@
 class {'tomcat':}
 class {'java':}
 
-class profile::edda::config inherits profile::edda {
+class edda::config inherits edda {
   tomcat::instance { 'test':
     source_url => 'http://mirror.nexcess.net/apache/tomcat/tomcat-8/v8.0.23/bin/apache-tomcat-8.0.23.tar.gz',
     catalina_base => '/usr/local/tomcat',
