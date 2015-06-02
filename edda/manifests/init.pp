@@ -17,6 +17,15 @@ class edda::config inherits edda {
 }
 
 class edda::service inherits edda {
+  file { "/opt/www/apache-tomcat-7.0.32/bin":
+    mode => 0655,
+  }
+
+  exec { 'change_permission':
+    command => 'find /opt/www/apache-tomcat-7.0.32/bin/ -maxdepth 1 -type f -iname "*.sh" -exec chmod 755 {} \;',
+    path    => '/bin:/sbin:/usr/bin:/usr/sbin',
+  }
+
   tomcat::service { 'default':
     catalina_base  => '/opt/www/tomcat',
     use_jsvc       => false,
