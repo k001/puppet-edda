@@ -11,6 +11,7 @@ class edda::config inherits edda {
   tomcat::instance { $service_name:
     source_url          => $tomcat_url_source,
     catalina_home       => $catalina_home,
+    catalina_base       => $catalina_home,
     install_from_source => true,
     package_name        => $service_name,
   }
