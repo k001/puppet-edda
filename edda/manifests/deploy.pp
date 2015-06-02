@@ -4,6 +4,6 @@ class edda::deploy inherits edda {
 
   tomcat::war { $war_version:
     catalina_base => $catalina_base,
-    war_source    => $war_source,
+    war_source    => "http://s3.amazonaws.com/edda-bucket/dev/war/edda-2.1.war",
   }
 }
