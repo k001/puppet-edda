@@ -12,15 +12,17 @@ class edda::config inherits edda {
     ensure => "directory",
     mode   => 750
   }->
-  file { "$catalina_home/setenv.sh":
+  file { 'setenv.sh':
+    path    => "$catalina_home/bin/setenv.sh",
     content => template('templates/setenv.erb'),
     mode    => 0644,
     owner   => root,
     group   => root,
     replace => true,
   }->
-  file { "$catalina_home/conf/logging.properties":
-    content => template('templates/logging.properties.erb'),
+  file { 'logging.properties':
+    path    => "$catalina_home/conf/logging.properties",
+    source  => template('templates/logging.properties.erb'),
     mode    => 0644,
     owner   => root,
     group   => root,
