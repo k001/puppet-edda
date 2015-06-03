@@ -20,7 +20,7 @@ class edda::config inherits edda {
     owner   => root,
     group   => root,
     replace => true,
-  }~>
+  }->
   file { 'logging.properties':
     path    => "$catalina_home/conf/logging.properties",
     content  => template('edda/logging.properties.erb'),
@@ -28,7 +28,7 @@ class edda::config inherits edda {
     owner   => root,
     group   => root,
     replace => true,
-  }~>
+  }->
   tomcat::instance { $service_name:
     source_url          => $tomcat_url_source,
     catalina_home       => $catalina_home,
