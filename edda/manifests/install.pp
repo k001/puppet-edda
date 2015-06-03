@@ -1,4 +1,6 @@
 class edda::install inherits edda {
+  $catalina_home = $edda::params::catalina_home
+
   package { 'java-1.7.0-openjdk':
     ensure => installed,
   }
