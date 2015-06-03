@@ -7,8 +7,19 @@ class edda::config inherits edda {
   $start_command = $edda::params::start_command
   $stop_command  = $edda::params::stop_command
   $tomcat_source = $edda::params::tomcat_url_source
-  $hostname      = $::hostname
 
+  tomcat::instance { $service_name:
+    source_url          => $tomcat_url_source,
+    catalina_home       => $catalina_home,
+    catalina_base       => $catalina_home,
+    install_from_source => true,
+    package_name        => $service_name,
+  }->
+  file { "$catalina_home":
+    ensure => "absent",
+    path   => $catalina_home,
+    mode   => 750
+  }->
   file { 'setenv.sh':
     path    => "$catalina_home/bin/setenv.sh",
     content => template('edda/setenv.erb'),
@@ -24,12 +35,5 @@ class edda::config inherits edda {
     owner   => root,
     group   => root,
     replace => true,
-  }->
-  tomcat::instance { $service_name:
-    source_url          => $tomcat_url_source,
-    catalina_home       => $catalina_home,
-    catalina_base       => $catalina_home,
-    install_from_source => true,
-    package_name        => $service_name,
   }
 }
