@@ -3,6 +3,9 @@ class edda::install inherits edda {
   package { 'java-1.7.0-openjdk':
     ensure => installed,
   }
+  package { 'ea-tomcat':
+    ensure => installed,
+  }
   exec { 'puppetlabs-java':
     path    => '/bin:/usr/bin',
     command => '/usr/bin/puppet module install puppetlabs-java --force',
