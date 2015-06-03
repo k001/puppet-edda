@@ -5,7 +5,7 @@ class edda (
   $stop_command  = edda::params::stop_command,
   ) inherits edda::params  {
   class {'edda::install': } ->
-  class {'edda::config': }  ~>
+  class {'edda::config': }  ->
   class {'edda::deploy': }  ->
   class {'edda::service': }
 }
