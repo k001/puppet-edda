@@ -23,7 +23,7 @@ class edda::config inherits edda {
   }->
   file { 'logging.properties':
     path    => "$catalina_home/conf/logging.properties",
-    source  => template('edda/logging.properties.erb'),
+    content  => template('edda/logging.properties.erb'),
     mode    => 0644,
     owner   => root,
     group   => root,
