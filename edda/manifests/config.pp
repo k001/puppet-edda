@@ -9,10 +9,6 @@ class edda::config inherits edda {
   $tomcat_source = $edda::params::tomcat_url_source
   $hostname      = $::hostname
 
-  file { "$catalina_home":
-    ensure => "directory",
-    mode   => 750
-  }->
   file { 'setenv.sh':
     path    => "$catalina_home/bin/setenv.sh",
     content => template('edda/setenv.erb'),
