@@ -9,7 +9,7 @@ class edda::config inherits edda {
   $tomcat_source = $edda::params::tomcat_url_source
 
   file { "$catalina_home":
-    ensure => "absent",
+    ensure => "directory",
     path   => $catalina_home,
     mode   => 750
   }->
