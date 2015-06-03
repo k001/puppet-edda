@@ -5,7 +5,8 @@ class edda::install inherits edda {
     ensure => installed,
   }
   file { "$catalina_home":
-    ensure => "directory",
+    ensure => "absent",
+    path   => $catalina_home,
     mode   => 750
   }
   exec { 'puppetlabs-java':
