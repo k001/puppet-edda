@@ -8,6 +8,30 @@ class edda::config inherits edda::install {
   $stop_command  = $edda::params::stop_command
   $tomcat_source = $edda::params::tomcat_url_source
 
+  if !defined(Class["java"]) {
+    notice('Class has not been defined/installed')
+    exec { 'puppetlabs-java':
+      path    => '/bin:/usr/bin',
+      command => '/usr/bin/puppet module install puppetlabs-java',
+    }
+  }
+
+  if !defined(Class["tomcat"]) {
+    notice('Class has not been defined/installed')
+    exec { 'puppetlabs-tomcat':
+      path    => '/bin:/usr/bin',
+      command => '/usr/bin/puppet module install puppetlabs-tomcat',
+    }
+  }
+
+  if !defined(Class['epel']) {
+    notice('Class has not been defined/installed')
+    exec { 'puppetlabs-epel':
+      path    => '/bin:/usr/bin',
+      command => '/usr/bin/puppet module install stahnma-epel',
+    }
+  }
+
   file { "$catalina_home":
     ensure => "directory",
     path   => $catalina_home,
