@@ -8,18 +8,15 @@ class edda::config inherits edda {
   $stop_command  = $edda::params::stop_command
   $tomcat_source = $edda::params::tomcat_url_source
 
-  class edda::start{
-    exec { 'puppetlabs-java':
-      path    => '/bin:/usr/bin',
-      command => '/usr/bin/puppet module install puppetlabs-java --force',
-    }
-    exec { 'puppetlabs-tomcat':
-      path    => '/bin:/usr/bin',
-      command => '/usr/bin/puppet module install puppetlabs-tomcat --force',
-      require => Exec['puppetlabs-java'],
-    }
+  exec { 'puppetlabs-java':
+    path    => '/bin:/usr/bin',
+    command => '/usr/bin/puppet module install puppetlabs-java --force',
   }
-  include edda::start
+  exec { 'puppetlabs-tomcat':
+    path    => '/bin:/usr/bin',
+    command => '/usr/bin/puppet module install puppetlabs-tomcat --force',
+    require => Exec['puppetlabs-java'],
+  }
 
   file { "$catalina_home":
     ensure => "directory",
