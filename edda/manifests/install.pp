@@ -6,16 +6,28 @@ class edda::install inherits edda {
   package { 'ea-tomcat':
     ensure => installed,
   }
-  exec { 'puppetlabs-java':
-    path    => '/bin:/usr/bin',
-    command => '/usr/bin/puppet module install puppetlabs-java --force',
+
+  if !defined(Class["java"]) {
+    notice('Class has not been defined/installed')
+    exec { 'puppetlabs-java':
+      path    => '/bin:/usr/bin',
+      command => '/usr/bin/puppet module install puppetlabs-java',
+    }
   }
-  exec { 'puppetlabs-tomcat':
-    path    => '/bin:/usr/bin',
-    command => '/usr/bin/puppet module install puppetlabs-tomcat --force',
+
+  if !defined(Class["tomcat"]) {
+    notice('Class has not been defined/installed')
+    exec { 'puppetlabs-tomcat':
+      path    => '/bin:/usr/bin',
+      command => '/usr/bin/puppet module install puppetlabs-tomcat',
+    }
   }
-  exec { 'puppetlabs-epel':
-    path    => '/bin:/usr/bin',
-    command => '/usr/bin/puppet module install stahnma-epel --force',
+
+  if !defined(Class['epel']) {
+    notice('Class has not been defined/installed')
+    exec { 'puppetlabs-epel':
+      path    => '/bin:/usr/bin',
+      command => '/usr/bin/puppet module install stahnma-epel',
+    }
   }
 }

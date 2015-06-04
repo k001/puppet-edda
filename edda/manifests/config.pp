@@ -1,7 +1,7 @@
 class {'tomcat':}
 class {'java':}
 
-class edda::config inherits edda {
+class edda::config inherits edda::install {
   $catalina_home = $edda::params::catalina_home
   $service_name  = $edda::params::service_name
   $start_command = $edda::params::start_command
