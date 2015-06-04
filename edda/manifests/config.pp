@@ -16,7 +16,7 @@ class edda::config inherits edda {
       notice('Class java:: has not been defined/installed')
       exec { 'puppetlabs-java':
         path    => '/bin:/usr/bin',
-        command => '/usr/bin/puppet module install puppetlabs-java',
+        command => '/usr/bin/puppet module install puppetlabs-java --force',
       }
     }
 
@@ -27,7 +27,7 @@ class edda::config inherits edda {
       notice('Class tomcat:: has not been defined/installed')
       exec { 'puppetlabs-tomcat':
         path    => '/bin:/usr/bin',
-        command => '/usr/bin/puppet module install puppetlabs-tomcat',
+        command => '/usr/bin/puppet module install puppetlabs-tomcat --force',
         require => Exec['puppetlabs-java'],
       }
     }
