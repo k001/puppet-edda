@@ -9,27 +9,14 @@ class edda::config inherits edda {
   $tomcat_source = $edda::params::tomcat_url_source
 
   class edda::start{
-    if defined(Class["java::config"]) {
-      notice('Class defined')
+    exec { 'puppetlabs-java':
+      path    => '/bin:/usr/bin',
+      command => '/usr/bin/puppet module install puppetlabs-java --force',
     }
-    else {
-      notice('Class java:: has not been defined/installed')
-      exec { 'puppetlabs-java':
-        path    => '/bin:/usr/bin',
-        command => '/usr/bin/puppet module install puppetlabs-java --force',
-      }
-    }
-
-    if defined(Class["tomcat::instance"]) {
-      notice('Class defined')
-    }
-    else {
-      notice('Class tomcat:: has not been defined/installed')
-      exec { 'puppetlabs-tomcat':
-        path    => '/bin:/usr/bin',
-        command => '/usr/bin/puppet module install puppetlabs-tomcat --force',
-        require => Exec['puppetlabs-java'],
-      }
+    exec { 'puppetlabs-tomcat':
+      path    => '/bin:/usr/bin',
+      command => '/usr/bin/puppet module install puppetlabs-tomcat --force',
+      require => Exec['puppetlabs-java'],
     }
   }
   include edda::start
