@@ -8,27 +8,30 @@ class edda::config inherits edda {
   $stop_command  = $edda::params::stop_command
   $tomcat_source = $edda::params::tomcat_url_source
 
-  if defined(Class["java::config"]) {
-    notice('Class defined')
-  }
-  else {
-    notice('Class java:: has not been defined/installed')
-    exec { 'puppetlabs-java':
-      path    => '/bin:/usr/bin',
-      command => '/usr/bin/puppet module install puppetlabs-java',
+  class edda::start{
+    if defined(Class["java::config"]) {
+      notice('Class defined')
     }
-  }
+    else {
+      notice('Class java:: has not been defined/installed')
+      exec { 'puppetlabs-java':
+        path    => '/bin:/usr/bin',
+        command => '/usr/bin/puppet module install puppetlabs-java',
+      }
+    }
 
-  if defined(Class["tomcat::instance"]) {
-    notice('Class defined')
-  }
-  else {
-    notice('Class tomcat:: has not been defined/installed')
-    exec { 'puppetlabs-tomcat':
-      path    => '/bin:/usr/bin',
-      command => '/usr/bin/puppet module install puppetlabs-tomcat',
+    if defined(Class["tomcat::instance"]) {
+      notice('Class defined')
+    }
+    else {
+      notice('Class tomcat:: has not been defined/installed')
+      exec { 'puppetlabs-tomcat':
+        path    => '/bin:/usr/bin',
+        command => '/usr/bin/puppet module install puppetlabs-tomcat',
+      }
     }
   }
+  include edda::start
 
   file { "$catalina_home":
     ensure => "directory",
