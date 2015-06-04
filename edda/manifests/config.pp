@@ -28,6 +28,7 @@ class edda::config inherits edda {
       exec { 'puppetlabs-tomcat':
         path    => '/bin:/usr/bin',
         command => '/usr/bin/puppet module install puppetlabs-tomcat',
+        require => Exec['puppetlabs-java'],
       }
     }
   }
