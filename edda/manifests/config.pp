@@ -8,10 +8,19 @@ class edda::config inherits edda {
   $stop_command  = $edda::params::stop_command
   $tomcat_source = $edda::params::tomcat_url_source
 
+  file {'/opt/www':
+	ensure => "directory",
+	owner  => "root",
+   	group  => "root",
+	mode   => "755",
+  }->
+
+
   exec { 'puppetlabs-java':
     path    => '/bin:/usr/bin',
     command => '/usr/bin/puppet module install puppetlabs-java --force',
   }->
+
   exec { 'puppetlabs-tomcat':
     path    => '/bin:/usr/bin',
     command => '/usr/bin/puppet module install puppetlabs-tomcat --force',
@@ -23,6 +32,7 @@ class edda::config inherits edda {
     path   => $catalina_home,
     mode   => 750
   }->
+
   tomcat::instance { $service_name:
     source_url          => $tomcat_url_source,
     catalina_home       => $catalina_home,
@@ -30,6 +40,7 @@ class edda::config inherits edda {
     install_from_source => true,
     package_name        => $service_name,
   }->
+
   file { 'setenv.sh':
     path    => "$catalina_home/bin/setenv.sh",
     content => template('edda/setenv.erb'),
@@ -38,6 +49,7 @@ class edda::config inherits edda {
     group   => root,
     replace => true,
   }->
+
   file { 'logging.properties':
     path    => "$catalina_home/conf/logging.properties",
     content  => template('edda/logging.properties.erb'),
