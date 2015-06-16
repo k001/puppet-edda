@@ -8,13 +8,19 @@ class edda::config inherits edda {
   $stop_command  = $edda::params::stop_command
   $tomcat_source = $edda::params::tomcat_url_source
 
+  package { 'java-1.7.0-openjdk':
+	ensure => installed,
+  }->
+  package { 'ea-tomcat':
+       ensure => installed,
+  }~>
+
   file {'/opt/www':
 	ensure => "directory",
 	owner  => "root",
    	group  => "root",
 	mode   => "755",
   }->
-
 
   exec { 'puppetlabs-java':
     path    => '/bin:/usr/bin',
