@@ -11,12 +11,12 @@ class edda::config inherits edda {
   exec { 'puppetlabs-java':
     path    => '/bin:/usr/bin',
     command => '/usr/bin/puppet module install puppetlabs-java --force',
-  }
+  }->
   exec { 'puppetlabs-tomcat':
     path    => '/bin:/usr/bin',
     command => '/usr/bin/puppet module install puppetlabs-tomcat --force',
     require => Exec['puppetlabs-java'],
-  }
+  }->
 
   file { "$catalina_home":
     ensure => "directory",
