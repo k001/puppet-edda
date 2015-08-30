@@ -1,6 +1,3 @@
-class {'tomcat':}
-class {'java':}
-
 class edda::config inherits edda {
   $catalina_home = $edda::params::catalina_home
   $service_name  = $edda::params::service_name
@@ -8,18 +5,13 @@ class edda::config inherits edda {
   $stop_command  = $edda::params::stop_command
   $tomcat_source = $edda::params::tomcat_url_source
 
-  package { 'java-1.7.0-openjdk':
-	ensure => installed,
-  }->
   package { 'ea-tomcat':
        ensure => installed,
-  }~>
+  }->
 
   file {'/opt/www':
-	ensure => "directory",
-	owner  => "root",
-   	group  => "root",
-	mode   => "755",
+    ensure => 'link',
+    target => '/opt/www/apache-tomcat-*'
   }->
 
   exec { 'puppetlabs-java':
@@ -40,10 +32,9 @@ class edda::config inherits edda {
   }->
 
   tomcat::instance { $service_name:
-    source_url          => $tomcat_url_source,
     catalina_home       => $catalina_home,
     catalina_base       => $catalina_home,
-    install_from_source => true,
+    install_from_source => false,
     package_name        => $service_name,
   }->
 
