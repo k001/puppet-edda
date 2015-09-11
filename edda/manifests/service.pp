@@ -10,9 +10,8 @@ class edda::service inherits edda {
   }
 
   tomcat::service { 'default':
-    catalina_home  => $catalina_home,
     use_jsvc       => false,
-    use_init       => true,
+    use_init       => false,
     service_name   => $service_name,
     service_ensure => running,
     start_command  => $start_command,

@@ -1,39 +1,39 @@
+class {'tomcat':}
+class {'java':}
+
 class edda::config inherits edda {
   $catalina_home = $edda::params::catalina_home
   $service_name  = $edda::params::service_name
   $start_command = $edda::params::start_command
   $stop_command  = $edda::params::stop_command
-  $tomcat_source = $edda::params::tomcat_url_source
 
-  package { 'ea-tomcat':
-       ensure => installed,
-  }->
+  if !defined(Class["java"]) {
+    notice('Class has not been defined/installed')
+    exec { 'puppetlabs-java':
+      path    => '/bin:/usr/bin',
+      command => '/usr/bin/puppet module install puppetlabs-java',
+    }
+  }
 
-  file {'/opt/www':
-    ensure => 'link',
-    target => '/opt/www/apache-tomcat-*'
-  }->
+ exec {'command when file not exists':
+    command         => "ln -s /opt/ec2/bin/aws /bin/aws",
+    user            => root,
+    onlyif          => "test ! -f /bin/aws",
+    path            => ['/usr/bin','/usr/sbin','/bin','/sbin'],
+    notify          => Notify['/bin/aws not found'],         
+  }
 
-  exec { 'puppetlabs-java':
-    path    => '/bin:/usr/bin',
-    command => '/usr/bin/puppet module install puppetlabs-java --force',
-  }->
+  notify {'/bin/aws not found': }
 
-  exec { 'puppetlabs-tomcat':
-    path    => '/bin:/usr/bin',
-    command => '/usr/bin/puppet module install puppetlabs-tomcat --force',
-    require => Exec['puppetlabs-java'],
-  }->
-
-  file { "$catalina_home":
-    ensure => "directory",
-    path   => $catalina_home,
-    mode   => 750
-  }->
+  if !defined(Class["tomcat"]) {
+    notice('Class has not been defined/installed')
+    exec { 'puppetlabs-tomcat':
+      path    => '/bin:/usr/bin',
+      command => '/usr/bin/puppet module install puppetlabs-tomcat',
+    }
+  }
 
   tomcat::instance { $service_name:
-    catalina_home       => $catalina_home,
-    catalina_base       => $catalina_home,
     install_from_source => false,
     package_name        => $service_name,
   }->
