@@ -1,5 +1,4 @@
 #!/bin/bash
-/bin/sudo su -
 cd /root/
 puppet module install puppetlabs-tomcat
 puppet module install puppetlabs-java

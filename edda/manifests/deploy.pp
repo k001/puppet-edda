@@ -8,3 +8,4 @@ class edda::deploy inherits edda {
     war_source    => $war_source,
   }
 }
+

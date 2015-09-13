@@ -7,3 +7,4 @@ class edda::params {
   $war_name          =  "stratos.war"
   $war_source        = "s3://edda-bucket/dev/war/$war_name"
 }
+
